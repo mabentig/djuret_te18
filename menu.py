@@ -7,7 +7,7 @@ class Menu:
 
 
     def show_menu(self):
-        print('self.__title')
+        print(self.__title)
 
         for i, item in enumerate(self.__menu_items):
             print(f'{i+1}: {item}')
