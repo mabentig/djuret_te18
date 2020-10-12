@@ -1,11 +1,13 @@
 class Menu:
+    """
+    Utförlig beskrivning av klassen
+    """    
 
-    
     def __init__(self, title, menu_items):
         self.__menu_items=(menu_items)
         self.__title=title
 
-
+    #Visar menyn
     def show_menu(self):
         print(self.__title)
 
