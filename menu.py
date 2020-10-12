@@ -1,6 +1,7 @@
 class Menu:
     """
-    Utförlig beskrivning av klassen
+    (Docstring)
+    En klass för att beskriva en meny.
     """    
 
     def __init__(self, title, menu_items):
