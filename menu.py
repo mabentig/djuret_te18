@@ -17,3 +17,4 @@ class Menu:
 main_menu = Menu('Huvudmeny', ['Status', 'Mat', 'Hygien', 'Aktiviteter', 'Inställningar', 'Avsluta'])
 
 main_menu.show_menu()
+help(Menu)
