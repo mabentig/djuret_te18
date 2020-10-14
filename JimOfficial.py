@@ -1,1 +1,0 @@
-print('hello min baba, we have small pp gangis')

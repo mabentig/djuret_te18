@@ -1,14 +1,11 @@
 class Menu:
-    """
-    (Docstring)
-    En klass för att beskriva en meny.
-    """    
 
+    
     def __init__(self, title, menu_items):
         self.__menu_items=(menu_items)
         self.__title=title
 
-    #Visar menyn
+
     def show_menu(self):
         print(self.__title)
 
@@ -18,4 +15,4 @@ class Menu:
 main_menu = Menu('Huvudmeny', ['Status', 'Mat', 'Hygien', 'Aktiviteter', 'Inställningar', 'Avsluta'])
 
 main_menu.show_menu()
-help(Menu)
+
