@@ -1,5 +1,5 @@
 import foodmanager
-import hygienmanager
+import hygienemanager
 import healthmanager
 
 import datetime
@@ -14,7 +14,7 @@ class Djur:
         self.__last_updated = datetime.datetime.now()
         
         self.__foodmanager = foodmanager.FoodManager()
-        self.__hygienmanager = hygienmanager.HygienManager()
+        self.__hygienemanager = hygienemanager.HygieneManager()
         self.__healthmanager = healthmanager.HealthManager()
 
         self.__faces = ('XP', ":'(", ':(', ':|', ':)', ':D')
@@ -30,7 +30,7 @@ class Djur:
         self.__last_updated = datetime.datetime.now()
 
         self.__foodmanager.update(elapsed_seconds)
-        self.__hygienmanager.update(elapsed_seconds)
+        self.__hygienemanager.update(elapsed_seconds)
         self.__healthmanager.update(elapsed_seconds)
 
 
@@ -41,7 +41,7 @@ class Djur:
         
         self.update()
 
-        status = min(self.__foodmanager.hunger, self.__hygienmanager.hygien, self.__healthmanager.happiness)
+        status = min(self.__foodmanager.hunger, self.__hygienemanager.hygiene, self.__healthmanager.happiness)
 
         status = random.uniform(0, 100)
         if status <= 0:

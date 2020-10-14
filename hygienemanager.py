@@ -1,10 +1,8 @@
 
-class HygienManager:
+class HygieneManager:
 
     def __init__(self):
-        self.hygien = 0
+        self.hygiene = 0
 
     def update(self, elapsed_time):
         return 0
-
-    
