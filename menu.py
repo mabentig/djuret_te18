@@ -42,22 +42,22 @@ class Menu:
     def show_Hygene(self):
         for i, item in enumerate(self.__hygene_Options):
             print(f'{i+1}: {item}')
-        hygeneRequest = input().lower()
-        self.__hygienmanager.do(hygeneRequest)
+        self.hygeneRequest = input().lower()
+        self.__hygienmanager.do(self.hygeneRequest)
         Menu.printStatus()
 
     def show_Activities(self):
         for i, item in enumerate(self.__activities):
             print(f'{i+1}: {item}')
-        activityRequest = input().lower()
-        self.__healthmanager.activity(activityRequest)
+        self.activityRequest = input().lower()
+        self.__healthmanager.activity(self.activityRequest)
         Menu.printStatus()
 
     def show_Settings(self):
         for i, item in enumerate(self.__settings):
             print(f'{i+1}: {item}')
-        settingRequest = input().lower()
-        if settingRequest == 'dark/light mode' or settingRequest == 'darkmode' and self.__darkMode == False or settingRequest == 'lightmode' and self.__darkMode == True:
+        self.settingRequest = input().lower()
+        if self.settingRequest == 'dark/light mode' or self.settingRequest == 'darkmode' and self.__darkMode == False or self.settingRequest == 'lightmode' and self.__darkMode == True:
            self.__darkMode = not self.__darkMode 
 
 
