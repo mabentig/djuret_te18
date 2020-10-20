@@ -1,6 +1,5 @@
 import random
-class HygienManager:
-
+class HygieneManager:
 
     def __init__(self):
         self.hygiene = 40
@@ -48,3 +47,4 @@ class HygienManager:
         self.__pills_taken +=1
         self.hygiene += 40
         print('Gurkbert pops an ibuprofen')
+
