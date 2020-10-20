@@ -84,4 +84,4 @@ elif request == 'inställningar':
 elif request == 'avsluta':
     sys.exit(0)
 else:
-    print('I don\'t know what that means...')
+    print('Jag vet inte vad det betyder...')
