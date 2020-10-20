@@ -41,7 +41,7 @@ class Djur:
         
         self.update()
 
-        status = min(self.__foodmanager.hunger, self.__hygienmanager.hygien, self.__healthmanager.happiness)
+        status = min(self.__foodmanager.hunger, self.__hygienmanager.hygiene, self.__healthmanager.happiness)
 
         if status <= 0:
             return self.__faces[0]
