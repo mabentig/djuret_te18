@@ -42,10 +42,10 @@ class Menu:
             Menu.show_Hygene()
 
         elif request == 'activities':
-            Menu.showActivities()
+            Menu.show_Activities()
 
         elif request == 'settings':
-            Menu.show_Settings
+            Menu.show_Settings()
 
         elif request == 'quit':
             sys.exit(0)
