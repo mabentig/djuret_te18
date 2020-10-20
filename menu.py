@@ -33,6 +33,7 @@ class Menu:
         print(djur.status())
     
     def show_Food(self):
+        self.__food_items = self.__foodmanager.getOptions()
         for i, item in enumerate(self.__food_items):
             print(f'{i+1}: {item}')
         foodRequest = input().lower()
@@ -40,6 +41,7 @@ class Menu:
         Menu.printStatus()
 
     def show_Hygene(self):
+        self.__hygene_Options = self.__hygienmanager.getOptions()
         for i, item in enumerate(self.__hygene_Options):
             print(f'{i+1}: {item}')
         self.hygeneRequest = input().lower()
@@ -47,6 +49,7 @@ class Menu:
         Menu.printStatus()
 
     def show_Activities(self):
+        self.__activities = self.__healthmanager.getOptions()
         for i, item in enumerate(self.__activities):
             print(f'{i+1}: {item}')
         self.activityRequest = input().lower()
@@ -63,7 +66,7 @@ class Menu:
 
 
 
-main_menu = Menu('Huvudmeny', ['Status', 'Mat', 'Hygien', 'Aktiviteter', 'Inställningar', 'Avsluta'], ['candy', 'meat', 'water'], ['shower', 'hand sanitizer'], ['play', 'exercise'])
+main_menu = Menu('Huvudmeny', ['Status', 'Mat', 'Hygien', 'Aktiviteter', 'Inställningar', 'Avsluta'])
 
 djur = djur.Djur('Jure')
 
