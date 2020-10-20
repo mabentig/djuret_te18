@@ -32,22 +32,22 @@ class Menu:
             print(f'{i+1}: {item}')
         request = input().lower()
 
-        if request == 'status':
+        if request == 'status' or request == "1":
             Menu.printStatus()
 
-        elif request == 'food':
+        elif request == 'food' or request == "2":
             Menu.show_Food()
 
-        elif request == 'hygene':
+        elif request == 'hygene' or request == "3":
             Menu.show_Hygene()
 
-        elif request == 'activities':
+        elif request == 'activities' or request == "4":
             Menu.show_Activities()
 
-        elif request == 'settings':
+        elif request == 'settings' or request == "5":
             Menu.show_Settings()
 
-        elif request == 'quit':
+        elif request == 'quit' or request == "6":
             sys.exit(0)
 
         else:
