@@ -14,7 +14,7 @@ class Djur:
         self.__last_updated = datetime.datetime.now()
         
         self.__foodmanager = foodmanager.FoodManager()
-        self.__hygienmanager = hygienmanager.HygienManager()
+        self.__hygienmanager = hygienemanager.HygieneManager()
         self.__healthmanager = healthmanager.HealthManager()
 
         self.__faces = ('XP', ":'(", ':(', ':|', ':)', ':D')
