@@ -1,5 +1,5 @@
 import foodmanager
-import hygienmanager
+import hygienemanager
 import healthmanager
 
 import datetime
