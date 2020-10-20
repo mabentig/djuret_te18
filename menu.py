@@ -28,6 +28,23 @@ class Menu:
 
         for i, item in enumerate(self.__menu_items):
             print(f'{i+1}: {item}')
+        request = input().lower()
+
+        if request == 'status':
+            Menu.printStatus()
+        elif request == 'mat':
+            Menu.show_Food()
+        elif request == 'hygien':
+            Menu.show_Hygene()
+        elif request == 'aktiviteter':
+            Menu.showActivities()
+        elif request == 'inställningar':
+            Menu.show_Settings
+        elif request == 'avsluta':
+            sys.exit(0)
+        else:
+            print('Jag vet inte vad det betyder...')
+
 
     def printStatus(self):
         print(djur.status())
@@ -71,20 +88,3 @@ main_menu = Menu('Huvudmeny', ['Status', 'Mat', 'Hygien', 'Aktiviteter', 'Instä
 djur = djur.Djur('Jure')
 
 main_menu.show_menu()
-
-request = input().lower()
-
-if request == 'status':
-    Menu.printStatus()
-elif request == 'mat':
-    Menu.show_Food()
-elif request == 'hygien':
-    Menu.show_Hygene()
-elif request == 'aktiviteter':
-    Menu.showActivities()
-elif request == 'inställningar':
-    Menu.show_Settings
-elif request == 'avsluta':
-    sys.exit(0)
-else:
-    print('Jag vet inte vad det betyder...')
