@@ -14,7 +14,9 @@ class Djur:
         self.__last_updated = datetime.datetime.now()
         
         self.__foodmanager = foodmanager.FoodManager()
+
         self.__hygienemanager = hygienemanager.HygieneManager()
+
         self.__healthmanager = healthmanager.HealthManager()
 
         self.__faces = ('XP', ":'(", ':(', ':|', ':)', ':D')
@@ -43,7 +45,6 @@ class Djur:
 
         status = min(self.__foodmanager.hunger, self.__hygienemanager.hygiene, self.__healthmanager.happiness)
 
-        status = random.uniform(0, 100)
         if status <= 0:
             return self.__faces[0]
         elif status <= 20:
