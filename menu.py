@@ -33,19 +33,19 @@ class Menu:
         request = input().lower()
 
         if request == 'status' or request == "1":
-            Menu.printStatus()
+            self.print_status()
 
         elif request == 'food' or request == "2":
-            Menu.show_Food()
+            self.show_Food()
 
         elif request == 'hygene' or request == "3":
-            Menu.show_Hygene()
+            self.show_Hygene()
 
         elif request == 'activities' or request == "4":
-            Menu.show_Activities()
+            self.show_Activities()
 
         elif request == 'settings' or request == "5":
-            Menu.show_Settings()
+            self.show_Settings()
 
         elif request == 'quit' or request == "6":
             sys.exit(0)
@@ -55,53 +55,53 @@ class Menu:
 
 
 
-    def printStatus(self):
+    def print_status(self):
         print(djur.status())
     
 
 
-    def show_Food(self):
-        for i, item in enumerate(self.__foodmanager.getOptions1()):
+    def show_food(self):
+        for i, item in enumerate(self.__foodmanager.get_options1()):
             print(f'{i+1}: {item}')
 
         foodRequest = input().lower()
 
-        for i, item in enumerate(self.__foodmanager.getOptions2(foodRequest)):
+        for i, item in enumerate(self.__foodmanager.get_options2(foodRequest)):
             print(f'{i+1}: {item}')
 
         foodRequest = input().lower()
 
         self.__foodmanager.eat(foodRequest)
 
-        Menu.printStatus()
+        self.print_status()
 
 
 
-    def show_Hygene(self):
-        for i, item in enumerate(self.__hygienmanager.getOptions()):
+    def show_hygene(self):
+        for i, item in enumerate(self.__hygienmanager.get_options()):
             print(f'{i+1}: {item}')
 
         self.hygeneRequest = input().lower()
 
         self.__hygienmanager.do(self.hygeneRequest)
 
-        Menu.printStatus()
+        self.print_status()
 
 
 
-    def show_Activities(self):
-        for i, item in enumerate(self.__healthmanager.getOptions()):
+    def show_activities(self):
+        for i, item in enumerate(self.__healthmanager.get_options()):
             print(f'{i+1}: {item}')
 
         self.activityRequest = input().lower()
 
         self.__healthmanager.activity(self.activityRequest)
 
-        Menu.printStatus()
+        self.print_status()
 
 
 
-    def show_Settings(self):
+    def show_settings(self):
         for i, item in enumerate(self.__settings):
             print(f'{i+1}: {item}')
 
