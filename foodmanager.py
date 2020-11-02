@@ -51,6 +51,11 @@ class FoodManager:
             }
         ]
     def update(self, elapsed_time):
+        last_time = now                         #last time blir vad som just nu ligger i now (alltså senaste gången man kollade datumet.)
+        now = datetime.now()                    #right now blir tiden just nu
+        now.strftime("%Y/%m/%D %H:%M:%S")       #formaterar texten till år/månad/dag timme/minut/sekund
+        change = now - last_time
+
         return 0
 
     def backpack(self):
