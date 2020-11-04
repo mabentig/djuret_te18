@@ -1,7 +1,4 @@
 import djur
-import foodmanager
-import hygienmanager
-import healthmanager
 import pickle
 
 import sys
@@ -21,12 +18,6 @@ class Menu:
 
         self.__djuret = None
 
-        #self.__foodmanager = foodmanager.FoodManager()
-
-        #self.__hygienmanager = hygienmanager.HygienManager()
-
-        #self.__healthmanager = healthmanager.HealthManager()
-
     def start_menu(self):
         os.system('cls')
         for i, item in enumerate(['New Animal', 'Load Animal', 'Quit']):
@@ -44,14 +35,41 @@ class Menu:
             self.show_menu()
 
         elif startRequest == 'load animal' or startRequest == 'load' or startRequest == '2':
-            print('poggers')
             temp = os.walk('Animals')
             names = None
             for i in temp:
-                print(i)
+                #print(i)
                 names = i
+            #print (names)
+            temporary = None
             for name in names:
-                print(os.path)
+                #print(os.path)
+                temporary = name
+            #print (temporary)
+            array = []
+            for name in temporary:
+                array.append(name.split('.')[0])
+            #print(array)
+            os.system('cls')
+            for i, item in enumerate(array):
+                print(f'{i+1}: {item}')
+
+            animalName = input().lower()
+            for name in array:
+                if animalName == name and not animalName.isnumeric():
+                    animalName = name
+                    break
+                elif animalName.isnumeric():
+                    animalName = array[int(animalName) - 1]
+                    break
+                else:
+                    self.start_menu()
+
+            os.system('cls')
+            with open('Animals/' + animalName + '.pickle', 'rb') as objektfilen:
+                self.__djuret = pickle.load(objektfilen)
+            self.show_menu()
+
 
         elif startRequest == 'quit' or startRequest == '3':
             os.system('cls')
@@ -103,7 +121,7 @@ class Menu:
     def print_status(self):
         os.system('cls')
 
-        print(djur.status())
+        print(self.__djuret.status())
 
         input('Press enter to continue')
 
@@ -114,12 +132,12 @@ class Menu:
     def show_food(self):
         os.system('cls')
 
-        for i, item in enumerate(djur.__foodmanager.get_options()):
+        for i, item in enumerate(self.__djuret.foodmanager.get_options()):
             print(f'{i+1}: {item}')
 
         foodRequest = input().lower()
 
-        self.__foodmanager.use(foodRequest)
+        self.__djuret.foodmanager.use(foodRequest)
 
         self.print_status()
     
@@ -132,13 +150,13 @@ class Menu:
     def show_hygene(self):
         os.system('cls')
 
-        for i, item in enumerate(self.__hygienmanager.get_options.keys()):
+        for i, item in enumerate(self.__djuret.hygienmanager.get_options.keys()):
             print(f'{i+1}: {item}')
 
         self.hygeneRequest = input().lower()
 
-        if self.hygeneRequest == self.__hygienmanager.get_options.keys()[0] or self.hygeneRequest == '1':
-            self.__hygienmanager.get_options[self.__hygienmanager.get_options.keys()[0]]()
+        if self.hygeneRequest == self.__djuret.hygienmanager.get_options.keys()[0] or self.hygeneRequest == '1':
+            self.__djuret.hygienmanager.get_options[self.__djuret.hygienmanager.get_options.keys()[0]]()
 
         self.print_status()
         
@@ -151,12 +169,12 @@ class Menu:
     def show_activities(self):
         os.system('cls')
 
-        for i, item in enumerate(self.__healthmanager.get_options()):
+        for i, item in enumerate(self.__djuret.healthmanager.get_options()):
             print(f'{i+1}: {item}')
 
         self.activityRequest = input().lower()
 
-        self.__healthmanager.activity(self.activityRequest)
+        self.__djuret.healthmanager.activity(self.activityRequest)
 
         self.print_status()
 
