@@ -13,14 +13,12 @@ class Djur:
         self.__birth = datetime.datetime.now()
         self.__last_updated = datetime.datetime.now()
         
-        self.__foodmanager = foodmanager.FoodManager()
+        self.foodmanager = foodmanager.FoodManager()
+        self.hygienmanager = hygienmanager.HygienManager()
+        self.healthmanager = healthmanager.HealthManager()
 
-        self.__hygienemanager = hygienemanager.HygieneManager()
-
-        self.__healthmanager = healthmanager.HealthManager()
 
         self.__faces = ('XP', ":'(", ':(', ':|', ':)', ':D')
-
 
 
     def update(self):
@@ -31,9 +29,9 @@ class Djur:
         elapsed_seconds = (datetime.datetime.now() - self.__last_updated).total_seconds()
         self.__last_updated = datetime.datetime.now()
 
-        self.__foodmanager.update(elapsed_seconds)
-        self.__hygienemanager.update(elapsed_seconds)
-        self.__healthmanager.update(elapsed_seconds)
+        self.foodmanager.update(elapsed_seconds)
+        self.hygienmanager.update(elapsed_seconds)
+        self.healthmanager.update(elapsed_seconds)
 
 
     def status(self):
@@ -43,7 +41,7 @@ class Djur:
         
         self.update()
 
-        status = min(self.__foodmanager.hunger, self.__hygienemanager.hygiene, self.__healthmanager.happiness)
+        status = min(self.foodmanager.hunger, self.hygienmanager.hygien, self.healthmanager.happiness)
 
         if status <= 0:
             return self.__faces[0]
