@@ -1,3 +1,4 @@
+
 import djur
 import pickle
 
@@ -5,9 +6,13 @@ import sys
 import os
 
 class Menu:
+    """
+    (Docstring)
+    En klass för att beskriva en meny.
+    """    
 
-    
     def __init__(self, title, menu_items):
+
         self.__menu_items = (menu_items)
 
         self.__settings = ['dark/light mode']
@@ -82,12 +87,14 @@ class Menu:
             self.start_menu()
 
 
+    #Visar menyn
     def show_menu(self):
         os.system('cls')
         print(self.__title)
 
         for i, item in enumerate(self.__menu_items):
             print(f'{i+1}: {item}')
+
         request = input().lower()
 
         if request == self.__menu_items[0].lower() or request == '1':
