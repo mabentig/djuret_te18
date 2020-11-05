@@ -179,12 +179,17 @@ class Menu:
     def show_activities(self):
         os.system('cls')
 
-        for i, item in enumerate(self.__djuret.healthmanager.get_options()):
+        healthOptions = ['Funpill', 'Playnormal', 'Playhard', 'Playgod']
+        healthFunctions = [self.__djuret.healthmanager.funpill(), self.__djuret.healthmanager.playnormal(), self.__djuret.healthmanager.playhard(), self.__djuret.healthmanager.playgod()]
+
+        for i, item in enumerate(healthOptions):
             print(f'{i+1}: {item}')
 
-        self.activityRequest = input().lower()
+        activityRequest = input().lower()
 
-        self.__djuret.healthmanager.activity(self.activityRequest)
+        for index, option in enumerate(healthOptions):
+            if activityRequest == option.lower() or int(activityRequest) == index:
+                healthFunctions[index]
 
         self.print_status()
 
