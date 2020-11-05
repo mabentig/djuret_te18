@@ -150,13 +150,19 @@ class Menu:
     def show_hygene(self):
         os.system('cls')
 
-        for i, item in enumerate(self.__djuret.hygienmanager.get_options.keys()):
+        hygieneOptions = self.__djuret.hygienmanager.get_options
+
+        for i, item in enumerate(hygieneOptions.keys()):
             print(f'{i+1}: {item}')
 
-        self.hygeneRequest = input().lower()
+        hygeneRequest = input().lower()
 
-        if self.hygeneRequest == self.__djuret.hygienmanager.get_options.keys()[0] or self.hygeneRequest == '1':
-            self.__djuret.hygienmanager.get_options[self.__djuret.hygienmanager.get_options.keys()[0]]()
+        #if self.hygeneRequest == self.__djuret.hygienmanager.get_options.keys()[0] or self.hygeneRequest == '1':
+        #    self.__djuret.hygienmanager.get_options[self.__djuret.hygienmanager.get_options.keys()[0]]()
+
+        for option in hygieneOptions:
+            if hygeneRequest == option.keys().lower():
+                hygieneOptions.option()
 
         self.print_status()
         
