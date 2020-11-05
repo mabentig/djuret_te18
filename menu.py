@@ -1,5 +1,7 @@
 import djur
 import pickle
+import numpy as np
+import random
 
 import sys
 import os
@@ -155,14 +157,16 @@ class Menu:
         for i, item in enumerate(hygieneOptions.keys()):
             print(f'{i+1}: {item}')
 
+        print(hygieneOptions)
         hygeneRequest = input().lower()
 
         #if self.hygeneRequest == self.__djuret.hygienmanager.get_options.keys()[0] or self.hygeneRequest == '1':
         #    self.__djuret.hygienmanager.get_options[self.__djuret.hygienmanager.get_options.keys()[0]]()
 
-        for option in hygieneOptions:
-            if hygeneRequest == option.lower():
-                hygieneOptions.option()
+
+        for index, option in enumerate(hygieneOptions.keys()):
+            if hygeneRequest == option.lower() or int(hygeneRequest) == index + 1:
+                hygieneOptions[option]()
 
         self.print_status()
         
@@ -213,3 +217,12 @@ main_menu = Menu('Main Menu', ['Status', 'Drink/Eat', 'Hygene', 'Activities', 'S
 #djur = djur.Djur('Jure')
 
 main_menu.start_menu()
+
+#test = ['1', '2', '3']
+
+#for i, number in enumerate(test):
+#    print(i)
+
+#print(abs(np.random.normal(1,0.5)))
+
+#djur.hygienmanager.get_options['Shower']

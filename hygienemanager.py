@@ -1,6 +1,6 @@
 from math import floor, trunc
 import random
-#import numpy as np
+import numpy as np
 
 
 class HygieneManager:
@@ -49,7 +49,7 @@ class HygieneManager:
         """
         Gurkbert duschar med varmvatten och använder balsam, conditioner samt tvål.
         """
-        self.hygiene += 20 * abs(random.normal(1,0.5))
+        self.hygiene += 20 * abs(np.random.normal(1,0.5))
         
         return 0
     
