@@ -1,6 +1,6 @@
-from math import trunc
+from math import floor, trunc
 import random
-import numpy as np
+#import numpy as np
 
 
 class HygieneManager:
@@ -26,21 +26,21 @@ class HygieneManager:
         För varje sekund som gått har Gurkbert antingen blivit smutsigare eller inte.
         """
         #lägger ihop elapsed- och total_time
-        self.total_time = self.total_time + elapsed_time
+        self.__total_time = self.__total_time + elapsed_time
         
         #spontant önskar eller minskar Gurkberts hygien
-        for x in range(self.total_time/10):
+        for x in range(floor(self.__total_time/10)):
             self.hygiene += random.choice([0.5,-1])
         
         #minskar total piller tagna
-        self.__pills_taken = max(self.__pills_taken-(self.total_time/10), 0)
+        self.__pills_taken = max(self.__pills_taken-(self.__total_time/10), 0)
                 
         #om gurkbert tar över 10 piller för snabbt så dör han då värdet blir en dödsdom
         if self.__pills_taken > 10:
             self.hygiene = -69
         
         #tar bort tid från total time för den använts
-        self.total_time %= 10
+        self.__total_time %= 10
             
         return 0
      
@@ -49,7 +49,7 @@ class HygieneManager:
         """
         Gurkbert duschar med varmvatten och använder balsam, conditioner samt tvål.
         """
-        self.hygiene += 20 * abs(np.random.normal(1,0.5))
+        self.hygiene += 20 * abs(random.normal(1,0.5))
         
         return 0
     

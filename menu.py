@@ -161,7 +161,7 @@ class Menu:
         #    self.__djuret.hygienmanager.get_options[self.__djuret.hygienmanager.get_options.keys()[0]]()
 
         for option in hygieneOptions:
-            if hygeneRequest == option.keys().lower():
+            if hygeneRequest == option.lower():
                 hygieneOptions.option()
 
         self.print_status()
