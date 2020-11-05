@@ -12,8 +12,6 @@ class Menu:
     def __init__(self, title, menu_items):
         self.__menu_items = (menu_items)
 
-        self.__settings = ['dark/light mode']
-
         self.__title = title
 
         self.__darkMode = False
@@ -105,7 +103,7 @@ class Menu:
             self.show_activities()
 
         elif request == self.__menu_items[4].lower() or request == '5':
-            self.show_settings()
+            self.show_tutorial()
 
         elif request == self.__menu_items[5].lower() or request == '6':
             os.system('cls')
@@ -134,12 +132,18 @@ class Menu:
     def show_food(self):
         os.system('cls')
 
-        for i, item in enumerate(self.__djuret.foodmanager.get_options()):
-            print(f'{i+1}: {item}')
+        items = ['Water', 'Bannana', 'JojKotfärssås', 'GoldenApple', 'Tequila']
+
+        #for i, item in enumerate(self.__djuret.foodmanager.get_options()):
+            #print(f'{i+1}: {item}')
+
+        self.__djuret.foodmanager.backpack()
 
         foodRequest = input().lower()
 
-        self.__djuret.foodmanager.use(foodRequest)
+        for index, option in enumerate(items):
+            if foodRequest == option.lower() or int(foodRequest) == index + 1:
+                self.__djuret.foodmanager.use(index)
 
         self.print_status()
     
@@ -188,7 +192,7 @@ class Menu:
         activityRequest = input().lower()
 
         for index, option in enumerate(healthOptions):
-            if activityRequest == option.lower() or int(activityRequest) == index:
+            if activityRequest == option.lower() or int(activityRequest) == index + 1:
                 healthFunctions[index]
 
         self.print_status()
@@ -196,28 +200,30 @@ class Menu:
         input('Press enter to continue')
         
         self.show_menu()
-
-
-
-    def show_settings(self):
+    
+    def show_tutorial(self):
         os.system('cls')
 
-        for i, item in enumerate(self.__settings):
-            print(f'{i+1}: {item}')
+        print('This game is played entirely using text!')
+        print('As you play, numbered options will appear in the console.')
+        print('By typing one of the options or its corresponding number and pressing enter,')
+        print('that option will be selected.')
+        print('')
+        print('Your goal in this game is to keep your animal alive and happy for as long as possible.')
+        print('To do this, you must open the game often and make sure your animal is fed, clean, and happy.')
+        print('This may seem hard at first, but i\'m sure you\'ll get used to checking in on your animal in no time!')
+        print('Good luck!')
+        print('')
 
-        self.settingRequest = input().lower()
-
-        if self.settingRequest == 'dark/light mode' or self.settingRequest == 'darkmode' and self.__darkMode == False or self.settingRequest == 'lightmode' and self.__darkMode == True:
-           self.__darkMode = not self.__darkMode 
         
         input('Press enter to continue')
-        
+
         self.show_menu()
 
 
 
 
-main_menu = Menu('Main Menu', ['Status', 'Drink/Eat', 'Hygene', 'Activities', 'Settings', 'Quit'])
+main_menu = Menu('Main Menu', ['Status', 'Drink/Eat', 'Hygiene', 'Activities', 'How to play', 'Quit'])
 
 #djur = djur.Djur('Jure')
 
