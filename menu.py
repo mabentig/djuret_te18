@@ -1,40 +1,38 @@
-
 import djur
 import pickle
+import numpy as np
 
 import sys
 import os
 
 class Menu:
-    """
-    (Docstring)
-    En klass för att beskriva en meny.
-    """    
 
+    
     def __init__(self, title, menu_items):
-
         self.__menu_items = (menu_items)
-
-        self.__settings = ['dark/light mode']
 
         self.__title = title
 
-        self.__darkMode = False
-
         self.__djuret = None
 
+        self.__name = None
+
     def start_menu(self):
+        """
+        När man startar spelet får man valet att starta ett nytt spel eller att ladda en sparfil.
+        """
+
         os.system('cls')
         for i, item in enumerate(['New Animal', 'Load Animal', 'Quit']):
             print(f'{i+1}: {item}')
         startRequest = input().lower()
 
         if startRequest == 'new animal' or startRequest == 'new' or startRequest == '1':
-            name = input('What will you name your animal? ')
+            self.__name = input('What will you name your animal? ')
 
-            self.__djuret = djur.Djur(name)
+            self.__djuret = djur.Djur(self.__name)
 
-            with open('Animals/' + name + '.pickle', 'wb') as objektfilen:
+            with open('Animals/' + self.__name + '.pickle', 'wb') as objektfilen:
                 pickle.dump(self.__djuret, objektfilen)
             
             self.show_menu()
@@ -43,29 +41,24 @@ class Menu:
             temp = os.walk('Animals')
             names = None
             for i in temp:
-                #print(i)
                 names = i
-            #print (names)
             temporary = None
             for name in names:
-                #print(os.path)
                 temporary = name
-            #print (temporary)
             array = []
             for name in temporary:
                 array.append(name.split('.')[0])
-            #print(array)
             os.system('cls')
             for i, item in enumerate(array):
                 print(f'{i+1}: {item}')
 
-            animalName = input().lower()
+            self.__name = input().lower()
             for name in array:
-                if animalName == name and not animalName.isnumeric():
+                if self.__name == name and not self.__name.isnumeric():
                     animalName = name
                     break
-                elif animalName.isnumeric():
-                    animalName = array[int(animalName) - 1]
+                elif self.__name.isnumeric():
+                    animalName = array[int(self.__name) - 1]
                     break
                 else:
                     self.start_menu()
@@ -87,14 +80,17 @@ class Menu:
             self.start_menu()
 
 
-    #Visar menyn
     def show_menu(self):
+
+        """
+        Huvudmenyn visas upp och användaren får välja vad de vill göra.
+        """
+
         os.system('cls')
         print(self.__title)
 
         for i, item in enumerate(self.__menu_items):
             print(f'{i+1}: {item}')
-
         request = input().lower()
 
         if request == self.__menu_items[0].lower() or request == '1':
@@ -110,11 +106,14 @@ class Menu:
             self.show_activities()
 
         elif request == self.__menu_items[4].lower() or request == '5':
-            self.show_settings()
+            self.show_tutorial()
 
         elif request == self.__menu_items[5].lower() or request == '6':
             os.system('cls')
-            #Save self.__djuret
+
+            with open('Animals/' + self.__name + '.pickle', 'wb') as objektfilen:
+                pickle.dump(self.__djuret, objektfilen)
+
             sys.exit(0)
 
         else:
@@ -126,6 +125,11 @@ class Menu:
 
 
     def print_status(self):
+
+        """
+        Vi kallar statusen från djur.py
+        """
+
         os.system('cls')
 
         print(self.__djuret.status())
@@ -137,14 +141,23 @@ class Menu:
 
 
     def show_food(self):
+
+        """
+        Matgruppen gjorde en funktion som skriver ut alla deras maträtter, så vi kallar den. Vi behöver ändå en lista med alla valen,
+        så vi fick skapa den manuellt.
+        """
+
         os.system('cls')
 
-        for i, item in enumerate(self.__djuret.foodmanager.get_options()):
-            print(f'{i+1}: {item}')
+        items = ['Water', 'Bannana', 'JojKotfärssås', 'GoldenApple', 'Tequila']
+
+        self.__djuret.foodmanager.backpack()
 
         foodRequest = input().lower()
 
-        self.__djuret.foodmanager.use(foodRequest)
+        for index, option in enumerate(items):
+            if foodRequest == option.lower() or int(foodRequest) == index + 1:
+                self.__djuret.foodmanager.use(index)
 
         self.print_status()
     
@@ -155,15 +168,25 @@ class Menu:
 
 
     def show_hygene(self):
+
+        """
+        Hugiengruppen gjorde sin getoptions till en dictionary som låter oss kalla deras funktionen direkt från den.
+        """
+
         os.system('cls')
 
-        for i, item in enumerate(self.__djuret.hygienmanager.get_options.keys()):
+        hygieneOptions = self.__djuret.hygienmanager.get_options
+
+        for i, item in enumerate(hygieneOptions.keys()):
             print(f'{i+1}: {item}')
 
-        self.hygeneRequest = input().lower()
 
-        if self.hygeneRequest == self.__djuret.hygienmanager.get_options.keys()[0] or self.hygeneRequest == '1':
-            self.__djuret.hygienmanager.get_options[self.__djuret.hygienmanager.get_options.keys()[0]]()
+        hygeneRequest = input().lower()
+
+
+        for index, option in enumerate(hygieneOptions.keys()):
+            if hygeneRequest == option.lower() or int(hygeneRequest) == index + 1:
+                hygieneOptions[option]()
 
         self.print_status()
         
@@ -174,43 +197,58 @@ class Menu:
 
 
     def show_activities(self):
+
+        """
+        Hälsogruppen hade inte gjort någon getOptions funktion, så vi fick gå in i deras kod och skriva av alla valen manuellt.
+        """
+
         os.system('cls')
 
-        for i, item in enumerate(self.__djuret.healthmanager.get_options()):
+        healthOptions = ['Funpill', 'Playnormal', 'Playhard', 'Playgod']
+        healthFunctions = [self.__djuret.healthmanager.funpill(), self.__djuret.healthmanager.playnormal(), self.__djuret.healthmanager.playhard(), self.__djuret.healthmanager.playgod()]
+
+        for i, item in enumerate(healthOptions):
             print(f'{i+1}: {item}')
 
-        self.activityRequest = input().lower()
+        activityRequest = input().lower()
 
-        self.__djuret.healthmanager.activity(self.activityRequest)
+        for index, option in enumerate(healthOptions):
+            if activityRequest == option.lower() or int(activityRequest) == index + 1:
+                healthFunctions[index]
 
         self.print_status()
 
         input('Press enter to continue')
         
         self.show_menu()
+    
+    def show_tutorial(self):
 
+        """
+        Vi tyckte att spelet var lite svårt att förstå, så vi skrev en liten guide. För att hålla temat är den fortfarande lite kryptisk
+        """
 
-
-    def show_settings(self):
         os.system('cls')
 
-        for i, item in enumerate(self.__settings):
-            print(f'{i+1}: {item}')
+        print('This game is played entirely using text!')
+        print('As you play, numbered options will appear in the console.')
+        print('By typing one of the options or its corresponding number and pressing enter,')
+        print('that option will be selected.')
+        print('')
+        print('Your goal in this game is to keep your animal alive and happy for as long as possible.')
+        print('To do this, you must open the game often and make sure your animal is fed, clean, and happy.')
+        print('This may seem hard at first, but i\'m sure you\'ll get used to checking in on your animal in no time!')
+        print('Good luck!')
+        print('')
 
-        self.settingRequest = input().lower()
-
-        if self.settingRequest == 'dark/light mode' or self.settingRequest == 'darkmode' and self.__darkMode == False or self.settingRequest == 'lightmode' and self.__darkMode == True:
-           self.__darkMode = not self.__darkMode 
         
         input('Press enter to continue')
-        
+
         self.show_menu()
 
 
 
 
-main_menu = Menu('Main Menu', ['Status', 'Drink/Eat', 'Hygene', 'Activities', 'Settings', 'Quit'])
-
-#djur = djur.Djur('Jure')
+main_menu = Menu('Main Menu', ['Status', 'Drink/Eat', 'Hygiene', 'Activities', 'How to play', 'Quit'])
 
 main_menu.start_menu()

@@ -2,7 +2,7 @@ import random
 class HealthManager:
     
     def __init__(self):
-        self.happiness = 0
+        self.happiness = 50
         self.__age = 0
 
     def update(self, elapsed_time):
@@ -56,7 +56,7 @@ class HealthManager:
             print("Gurkbert was sheeple and is struck by lightning.")
             self.happiness = self.happiness * 0.6
         elif defeatzeus == 1:
-            print("Gurkbert yells 'ABSORB BREAK!' and throws a thunderbolt at Zeus.)
+            print("Gurkbert yells 'ABSORB BREAK!' and throws a thunderbolt at Zeus.")
             self.happiness += 30
           
     def get_options(self):
