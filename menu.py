@@ -55,10 +55,10 @@ class Menu:
             self.__name = input().lower()
             for name in array:
                 if self.__name == name and not self.__name.isnumeric():
-                    animalName = name
+                    self.__name = name
                     break
                 elif self.__name.isnumeric():
-                    animalName = array[int(self.__name) - 1]
+                    self.__name = array[int(self.__name) - 1]
                     break
                 else:
                     self.start_menu()
