@@ -195,7 +195,6 @@ class Menu:
         self.show_menu()
 
 
-
     def show_activities(self):
 
         """

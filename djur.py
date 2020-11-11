@@ -34,7 +34,7 @@ class Djur:
         self.healthmanager.update(elapsed_seconds)
 
 
-    def status(self, test=False):
+    def status(self, test_mode=False):
         """
         Uppdaterar, beräknar status och returnerar en ansiktsstring.
         """
@@ -45,11 +45,14 @@ class Djur:
         if min(self.foodmanager.hunger, self.hygienmanager.hygiene, self.healthmanager.happiness) < 0:
             status = -1
         
-        if max(self.foodmanager.hunger, self.hygienmanager.hygiene, self.healthmanager.happiness) > 100:
+        elif max(self.foodmanager.hunger, self.hygienmanager.hygiene, self.healthmanager.happiness) > 100:
             status = -1
-        status = min(self.foodmanager.hunger, self.hygienmanager.hygiene, self.healthmanager.happiness)
+        
+        else:
+            status = min(self.foodmanager.hunger, self.hygienmanager.hygiene, self.healthmanager.happiness)
 
-        print(f'Food: {self.foodmanager.hunger}, Hygiene: {self.hygienmanager.hygiene}, Happiness: {self.healthmanager.happiness}')
+        if test_mode:
+            print(f'Food: {self.foodmanager.hunger}, Hygiene: {self.hygienmanager.hygiene}, Happiness: {self.healthmanager.happiness}')
         
 
         if status <= 0:
