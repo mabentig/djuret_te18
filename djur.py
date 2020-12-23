@@ -1,5 +1,5 @@
 import foodmanager
-import hygienmanager
+import hygienemanager
 import healthmanager
 
 import datetime
@@ -13,12 +13,12 @@ class Djur:
         self.__birth = datetime.datetime.now()
         self.__last_updated = datetime.datetime.now()
         
-        self.__foodmanager = foodmanager.FoodManager()
-        self.__hygienmanager = hygienmanager.HygienManager()
-        self.__healthmanager = healthmanager.HealthManager()
+        self.foodmanager = foodmanager.FoodManager()
+        self.hygienmanager = hygienemanager.HygieneManager()
+        self.healthmanager = healthmanager.HealthManager()
+
 
         self.__faces = ('XP', ":'(", ':(', ':|', ':)', ':D')
-
 
 
     def update(self):
@@ -29,21 +29,32 @@ class Djur:
         elapsed_seconds = (datetime.datetime.now() - self.__last_updated).total_seconds()
         self.__last_updated = datetime.datetime.now()
 
-        self.__foodmanager.update(elapsed_seconds)
-        self.__hygienmanager.update(elapsed_seconds)
-        self.__healthmanager.update(elapsed_seconds)
+        self.foodmanager.update(elapsed_seconds)
+        self.hygienmanager.update(elapsed_seconds)
+        self.healthmanager.update(elapsed_seconds)
 
 
-    def status(self):
+    def status(self, test_mode=False):
         """
         Uppdaterar, beräknar status och returnerar en ansiktsstring.
         """
         
         self.update()
 
-        status = min(self.__foodmanager.hunger, self.__hygienmanager.hygien, self.__healthmanager.happiness)
+        # Kolla om död
+        if min(self.foodmanager.hunger, self.hygienmanager.hygiene, self.healthmanager.happiness) < 0:
+            status = -1
+        
+        elif max(self.foodmanager.hunger, self.hygienmanager.hygiene, self.healthmanager.happiness) > 100:
+            status = -1
+        
+        else:
+            status = min(self.foodmanager.hunger, self.hygienmanager.hygiene, self.healthmanager.happiness)
 
-        status = random.uniform(0, 100)
+        if test_mode:
+            print(f'Food: {self.foodmanager.hunger}, Hygiene: {self.hygienmanager.hygiene}, Happiness: {self.healthmanager.happiness}')
+        
+
         if status <= 0:
             return self.__faces[0]
         elif status <= 20:
@@ -56,4 +67,3 @@ class Djur:
             return self.__faces[4]
         else:
             return self.__faces[5]
-        
